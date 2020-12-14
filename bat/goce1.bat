@@ -1,5 +1,5 @@
-gmt begin goceSCS16km png E600
-    set input=D:\matlabprogram\mohoinvers\gocedown234_105_125_5_25.txt
+gmt begin tcvggSCS16km png E600
+    set input=D:\matlabprogram\mohoinvers\tcgoce.txt -i0,1,2
     set out=grd.grd
     set seab=line\seabasinline.txt
     set fault=line\fault.txt
@@ -7,7 +7,7 @@ gmt begin goceSCS16km png E600
     set rig2=line\ridge2.txt
     set sd=line\subduction.txt
     set PN=line\pointname\pointname.txt
-    gmt set FONT 16p,Helvetica,black
+    gmt set FONT 16p,Helvetica,black 
     
     gmt xyz2grd %input% -R105/125/5/25 -I10m -G%out%
     gmt grd2cpt %out% -R105/125/5/25 -CwaveletA -Z
