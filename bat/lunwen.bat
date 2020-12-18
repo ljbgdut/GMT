@@ -1,11 +1,26 @@
-gmt begin pictures\output png
-    set input=D:\Sea_data_set\Satellite_altimetry_gravity\curv_30.1.nc
-    gmt grd2cpt %input% -R105/125/5/25 -Crainbow -Z -D -F -H > vgg301.cpt
-    gmt basemap -R105/125/5/25 -JM7i -Ba5f -BWSen
-    
-    gmt grdimage %input% -I
-    REM gmt coast -R103/120/2/23 -JM7i -W1/0.5p,black,dashed -A100/0/1 -G220,220,220 -Da
-    gmt colorbar -C -DjMR+o-0.8i/0i+m -Bxaf -By+l"(E)" -I
+gmt begin SCS png E600
+    set input=D:\matlabprogram\mohoinvers\ETOPO10GOCE16km-ggt.txt -i0,1,3
+    set out=ETOPO10_105_125_5_25.grd
+    set seab=line\seabasinline.txt
+    set fault=line\fault.txt
+    set rig1=line\ridge1.txt
+    set rig2=line\ridge2.txt
+    set sd=line\subduction.txt
+    set PN=line\pointname\pointname.txt
+    gmt set FONT 14p,Helvetica,black
+    gmt xyz2grd %input% -I10m -R105/125/5/25 -I10m -G%out%
+    gmt grd2cpt %out% -R105/125/5/25 -CwaveletA -Z
+    REM gmt makecpt -T0/35/1 -Crainbow -Z
+    gmt basemap -BWSen -Ba5f -R105/125/5/25 -JM8i
+    gmt grdimage %out% -R105/125/5/25
+    gmt plot %seab% -W1.5p,white,dashed
+    gmt plot %fault% -W2p,black,dashed
+    gmt plot %rig1% -W2p,yellow,dashed
+    gmt plot %rig2% -W2p,yellow,dashed
+    gmt plot %sd% -W2.5p,139/0/0
+    gmt text %PN% -F+f+a
 
-    REM gmt grd2xyz %input% -R100/129:59:00/0/29:59:00 > ETOPO1_100_130_0_30.txt
+    gmt coast -R105/125/5/25 -W1/1.0p,black,dashed -A100/0/1 -Da
+    gmt colorbar -C -DjBC+w7.5i/0.1i+o0i/-0.5i+m -Bxaf -By+l"(E)" -S -I
+
 gmt end show

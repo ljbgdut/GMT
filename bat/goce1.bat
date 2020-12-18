@@ -1,5 +1,5 @@
 gmt begin tcvggSCS16km png E600
-    set input=D:\matlabprogram\mohoinvers\tcgoce.txt -i0,1,2
+    set input=D:\matlabprogram\mohoinvers\ETOPO10GOCE16km-ggt.txt -i0,1,3
     set out=grd.grd
     set seab=line\seabasinline.txt
     set fault=line\fault.txt
